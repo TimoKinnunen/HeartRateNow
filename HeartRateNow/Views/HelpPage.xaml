@@ -1,0 +1,286 @@
+﻿<Page
+    x:Class="HeartRateNow.Views.HelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource HeartRateNowTitleTextBlockStyle}"
+                   Text="Help and trouble shooting"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}"
+                      HorizontalScrollMode="Disabled"
+                      IsHorizontalRailEnabled="False"
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}">
+                            Monitor heart rate using Bluetooth Low Energy heart rate sensor
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                            Please make sure human or animal body is wearing your BLE heart rate sensor. Otherwise Windows will not discover your BLE heart rate sensor.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                            Moisten BLE heart rate sensor's plastic electrode areas on the reverse side of the strap. Activate BLE heart rate sensor by touching the metal snaps.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}">
+                            Tested with Polar H7 and Polar H10 heart rate sensors
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}">
+                            Bluetooth Low Energy 4.0 or greater
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Almost any heart rate sensor brand can be used. Try with Microsoft Band?
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}">
+                            Polar H7 heart rate sensor
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Measure heart rate on human body.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Measure heart rate under water when swimming.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Measure heart rate on horse body. Use long strap on horse.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Enumerate nearby Bluetooth Low Energy devices including BLE heart rate sensors
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Go to page 'Enumerate BLE devices'. Tap on button 'Start enumerating' to scan for Bluetooth Low Energy devices including BLE heart rate sensors.
+                            Select your BLE heart rate sensor.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Connect to selected BLE heart rate sensor
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Go to page 'Connect to BLE heart rate sensor'. Tap on button 'Connect' and you are done.
+                            Connecting is to change session keys between BLE heart rate sensor and Windows. Communication is encrypted using these keys.
+                            Later on you can disconnect from your BLE heart rate sensor and use this same app on Windows 10 Phone.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Go to page 'Heart rate'
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Heart rate is shown. Graph line mean value is shown.
+                            Graph help lines 'Red zone', 'Green zone' and 'Yellow zone' bpm-values are shown.
+                            You can adjust these help lines in settings to suit you. 
+                            Human maximum heart rate for age is an elusive number. 
+                            The usual equation is 220 – age = maximum heart rate (MHR).
+                            Set this value as your 'Red zone' if you train for fitness.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            When you connect to a heart rate sensor a file name is created
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            This file name contains date and time when connection happens. 
+                            FileSavePicker uses this file name. And you can override this file name by replacing it when asked for a file name.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            When you connect to a heart rate sensor battery level is read
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Battery level is read only once in the beginning of a measuring session.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            When you close the app
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Heart rate measurements are not saved.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            When you tap on 'Save' button on 'Heart rate' page you choose a location using FileSavePicker where to save a file
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Heart rate measurements are saved to a location of your choice as .json-file (JSON-format data).
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            For example you can create a folder ...\Documents\HeartRateNow, where you save your files.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            A copy of latest saved measurements are saved to ...\LocalState\HeartRateNow\HeartRateMeasurements.json  and replaces the older file, if any.
+                            In this location there is only one file.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Settings
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Select a voice to speak out heart rate.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Set graph help lines: 'Red zone' (maximum value is 400 bpm), 'Green zone' and 'Yellow zone' bpm-values of your choice.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Disable (default) or enable Windows lock screen.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Set graph datapoints in minutes (1 min. - 600 min.).
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Trouble shooting
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Please make sure human or animal body is wearing your BLE heart rate sensor.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            You can't connect same BLE heart rate sensor if it is already connected with app HeartRateNow on another device, for example, your smartphone.
+                            You see a message: 'BLE heart rate sensor is unreachable.'. This app HeartRateNow is available also for Windows 10 Mobile. Disconnect HeartRateNow on another device and try again. 
+                            When you close this app it disconnects from BLE heart rate sensor.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Use Bluetooth Low Energy heart rate sensors
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Windows solely detects BLE heart rate sensors and there is little you can do about it.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            If BLE heart rate sensor is not detected by Windows, moisten the strap and try again. 
+                            And you can take out battery from BLE heart rate sensor and put it back and try again. This is to renew user session keys.
+                            Communication is encrypted and sometimes these keys are not valid through several sessions.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Water or electrode gel
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Moistening with water the plastic electrode areas on the reverse side of the strap is sometimes not enough and BLE heart rate sensor is not detected at all by Windows.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Use electrode gel on the plastic electrode areas on the reverse side of the strap to increase electrical conductivity between dry skin and dry electrodes.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Bluetooth Low Energy (Bluetooth 4.0 or higher)
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Battery can last for years when used 1 hour per day.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Foreground app with limitations
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            This app is running in foreground. Shows heart rate when app is visible. Minimizing window will suspend this app and your heart rate may not be recorded.
+                            This app saves now data for 600 minutes only and it may vary in future when this app is developed more.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Text-to-Speech
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            App uses languages and voices of your Windows operating system. You can add new languages in Windows settings.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Your tools are
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Buy this app, buy a Bluetooth Low Energy (Bluetooth 4.0 or higher) heart rate sensor, buy a Bluetooth Low Energy adapter (dongle) if missing.
+                            I recommend Polar H7 heart rate sensor because of the strap with electrodes and accuracy. You may have already a compatible heart rate sensor.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            If you experience for certain abnormal heart rate measurements with very high or zero values you should moisten the strap.
+                            Or disconnect and connect again.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Windows 10 Mobile
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Connect Bluetooth headset. Start this app. Put smartphone in your pocket. And start walking or running.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Thank you
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            Can you recommend this app to your friends? I hope so. I need you. 
+                            Put your testimony and score at Windows App Store to promote this app.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            The toughest thing is to find a great idea to develop an app around.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            My idea was born when I saw trotting horses be trained. Trainers measured heart rate after training, not during training.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}"> 
+                            And now I have realized that this app can be used in rural areas for human heart rate measurement.
+                            This app is not for medical use.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}"> 
+                            Document updated 20210114
+                </TextBlock>
+
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

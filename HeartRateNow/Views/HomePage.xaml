@@ -1,0 +1,120 @@
+﻿<Page
+    x:Class="HeartRateNow.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource HeartRateNowTitleTextBlockStyle}" 
+                   Text="Home"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="DeviceAppBarButton"
+                              Tapped="DeviceAppBarButton_Tapped"
+                              Label="Settings">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE115;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="HeartRateAppBarButton"
+                              Tapped="HeartRateAppBarButton_Tapped"
+                              Label="Heart rate">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="EnumerateAppBarButton"
+                              Tapped="EnumerateAppBarButton_Tapped"
+                              Label="Enumerate BLE devices">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE702;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+
+                <AppBarButton x:Name="WindowsBluetoothSettingsButton"
+                              Icon="Setting" 
+                              Label="Windows Bluetooth settings"
+                              Click="WindowsBluetoothSettingsButton_Click">
+                </AppBarButton>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}"
+                      HorizontalScrollMode="Disabled"
+                      IsHorizontalRailEnabled="False"
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+                <TextBlock Style="{StaticResource HeartRateNowSubTitleTextBlockStyle}">
+                    Monitor heart rate using Bluetooth Low Energy heart rate sensor.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Enumerate nearby Bluetooth Low Energy devices including BLE heart rate sensors.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Select your BLE heart rate sensor.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Connect to your BLE heart rate sensor. And you are done.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Later on you can disconnect from your BLE heart rate sensor and use this same app on Windows 10 Phone.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Select a voice to speak out heart rate, beats per minute (bpm), readings.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Pair or connect your Bluetooth headset in Windows Bluetooth settings.
+                </TextBlock>
+                <TextBlock Style="{StaticResource HeartRateNowBodyTextBlockStyle}">
+                    Tested with Polar H7 heart rate sensor.
+                </TextBlock>
+
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

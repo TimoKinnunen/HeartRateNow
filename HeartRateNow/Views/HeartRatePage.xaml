@@ -1,0 +1,212 @@
+﻿<Page
+    x:Class="HeartRateNow.Views.HeartRatePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="MainGrid">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource HeartRateNowTitleTextBlockStyle}" 
+                   Text="Heart rate"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+                <AppBarButton x:Name="DeviceAppBarButton"
+                              Tapped="DeviceAppBarButton_Tapped"
+                              Label="Settings">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE115;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="MuteAppBarButton"
+                              Visibility="{x:Bind MyAppViewModel.MuteAppBarButtonVisibility,Mode=OneWay}"
+                              Icon="Mute" 
+                              Label="Muted"
+                              Tapped="MuteAppBarButton_Tapped"/>
+                <AppBarButton x:Name="SpeakAppBarButton"
+                              Visibility="{x:Bind MyAppViewModel.SpeakAppBarButtonVisibility,Mode=OneWay}"
+                              Icon="Volume" 
+                              Label="{x:Bind MyAppViewModel.AppBarButtonSpeakingText,Mode=OneWay}"
+                              Tapped="SpeakAppBarButton_Tapped"/>
+
+                <AppBarButton x:Name="ClearDataAppBarButton"
+                              Icon="Clear" 
+                              Label="Clear data"
+                              Tapped="ClearDataAppBarButton_Tapped"/>
+
+                <AppBarButton x:Name="SaveDataAppBarButton"
+                              Icon="Save" 
+                              Label="Save data"
+                              Tapped="SaveDataAppBarButton_Tapped"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+
+                <Grid x:Name="HeartRateGrid" 
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                      VerticalAlignment="Top">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="HeartRateMeasurementStackPanel"
+                                HorizontalAlignment="Stretch"
+                                Grid.Row="0">
+
+                        <TextBlock x:Name="HeartRateMeasurementTextBlock"
+                                   Text="{x:Bind MyAppViewModel.HeartRateMeasurementAsSound,Mode=OneWay}"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource HeartRateNowBodyTextBlockStyle}"
+                                   FontSize="160"/>
+                        <TextBlock Text="beats per minute (bpm)"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource HeartRateNowBodyTextBlockStyle}"/>
+                        <TextBlock x:Name="InfoDateTimeSecondsTextBlock" 
+                                   Text="{x:Bind MyAppViewModel.HeartRateMeasurementTimeStamp,Mode=OneWay}"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource HeartRateNowBodyTextBlockStyle}"
+                                   FontWeight="SemiBold"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="ChartGrid"
+                              Grid.Row="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid x:Name="ChartLeftGrid"
+                                  Margin="0,0,8,0"
+                                  Grid.Row="0"
+                                  Grid.Column="0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock x:Name="TopHeartRateMeasurementTextBlock"
+                                           Grid.Row="0"
+                                           Text="{x:Bind MyAppViewModel.TopHeartRateMeasurementText,Mode=OneWay}"
+                                           TextAlignment="Right"
+                                           VerticalAlignment="Top"
+                                           Style="{StaticResource HeartRateNowBodyTextBlockStyle}"/>
+
+                                <TextBlock x:Name="BottomHeartRateMeasurementTextBlock"
+                                           Grid.Row="3"
+                                           Text="{x:Bind MyAppViewModel.BottomHeartRateMeasurementText,Mode=OneWay}"
+                                           TextAlignment="Right"
+                                           VerticalAlignment="Top"
+                                           Style="{StaticResource HeartRateNowBodyTextBlockStyle}"/>
+                            </Grid>
+
+                            <Grid x:Name="ChartRightGrid"
+                                  Margin="0,16,12,8"
+                                  Grid.Row="0"
+                                  Grid.Column="1">
+
+                                <Canvas x:Name="ChartCanvas"
+                                        MinHeight="60"
+                                        SizeChanged="ChartCanvas_SizeChanged"/>
+                            </Grid>
+
+                            <TextBlock x:Name="timeElapsedTextBlock" 
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{x:Bind MyAppViewModel.TimeElapsed,Mode=OneWay}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       TextAlignment="Left"
+                                       Style="{StaticResource HeartRateNowBodyTextBlockStyle}"/>
+
+                            <TextBlock x:Name="rightTimeElapsedTextBlock" 
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       Padding="0,0,18,0"
+                                       Text="00:00:00"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Top"
+                                       TextAlignment="Right"
+                                       Style="{StaticResource HeartRateNowBodyTextBlockStyle}"/>
+
+                        </Grid>
+                        <StackPanel x:Name="PlainDatapointsInMinutesStackPanel"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalAlignment="Center">
+                            <TextBlock x:Name="PlainDatapointsInMinutesTextBlock" 
+                                       Text="{x:Bind MyAppViewModel.PlainDatapointsInMinutesText,Mode=OneWay}"
+                                       Style="{ThemeResource HeartRateNowBodyTextBlockStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>
